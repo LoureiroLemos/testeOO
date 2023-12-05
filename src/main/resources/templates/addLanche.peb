@@ -1,0 +1,22 @@
+{% extends "templates/base.peb" %}
+{% block content %}
+{% if resultado != null %}
+    {{resultado.getMsg}}
+{% endif %}
+
+<h1>Cadastrar Lanche</h1>
+<form method="post" action="/addLanche.peb">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" value="{{nome}}"/><br />
+    <label for="valor">Valor:</label>
+    <input type="text" id="valor" name="valor" value="{{valor}}"/><br />
+
+
+    
+    <input type="submit" />
+</form>
+
+<button>
+    <a href="/">Voltar</a>
+</button>
+{% endblock %}

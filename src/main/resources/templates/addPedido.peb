@@ -1,0 +1,28 @@
+{% extends "templates/base.peb" %}
+{% block content %}
+{% if resultado != null %}
+    {{resultado.getMsg}}
+{% endif %}
+
+<h1>Cadastrar Pedido</h1>
+<form method="post" action="/addLanche.peb">
+    <label for="bebida">CBebida:</label>
+    <select name="bebida" id="bebida" value="{{bebidaId}}">
+        {% for bebida in bebidas%}
+            <option value="{{bebida.id}}" 
+            {% if bebida.id == bebidaId %}
+            selected
+            {% endif %}
+            >{{bebida.titulo}}</option>
+        {% endfor %}
+    </select>
+
+
+    
+    <input type="submit" />
+</form>
+
+<button>
+    <a href="/">Voltar</a>
+</button>
+{% endblock %}

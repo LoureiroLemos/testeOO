@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Atividade Final OO</title>
+    </head>
+    <body>
+
+        <div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

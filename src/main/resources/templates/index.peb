@@ -1,0 +1,12 @@
+{% extends "templates/base.peb" %}
+
+{% block content %}
+    <h1>Produtos</h1>
+    <a href="/addBebida.peb">Cadastrar Bebida</a></br></br>
+    <a href="/listBebidas.peb">Listar Bebidas</a></br></br>
+    <a href="/addLanche.peb">Cadastrar Lanche</a></br></br>
+    <a href="/listLanches.peb">Listar Lanches</a></br></br>
+    <h1>Pedidos</h1>
+    <a href="/addPedido.peb">Montar Pedido</a>
+    <a href="/listPedidos.peb">Listar Pedidos</a>
+{% endblock %}  
