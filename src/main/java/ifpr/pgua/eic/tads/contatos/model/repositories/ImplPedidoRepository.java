@@ -13,13 +13,9 @@ import ifpr.pgua.eic.tads.contatos.model.entities.Pedido;
 
 public class ImplPedidoRepository implements PedidoRepository {
     private PedidoDAO dao;
-    private BebidaDAO bebidaDao;
-    private LancheDAO lancheDAO;
 
     public ImplPedidoRepository(PedidoDAO dao, BebidaDAO bebidaDao, LancheDAO lancheDAO) {
         this.dao = dao;
-        this.bebidaDao = bebidaDao;
-        this.lancheDAO = lancheDAO;
     }
 
     @Override

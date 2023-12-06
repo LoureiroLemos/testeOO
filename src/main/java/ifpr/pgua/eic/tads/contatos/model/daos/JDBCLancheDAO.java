@@ -56,6 +56,7 @@ public class JDBCLancheDAO implements LancheDAO {
                 Lanche lanche = new Lanche(id, nome, valor);
 
                 lista.add(lanche);
+
             }
             con.close();
             return Resultado.sucesso("Contatos carregados", lista);

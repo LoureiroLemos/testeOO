@@ -4,14 +4,6 @@ public class Pedido {
     private int id;
     private Bebida bebida;
     private Lanche lanche;
-    private String nomeBebida;
-    private String nomeLanche;
-
-    public Pedido(int id, String nomeBebida, String nomeLanche) {
-        this.id = id;
-        this.nomeBebida = nomeBebida;
-        this.nomeLanche = nomeLanche;
-    }
 
     public Pedido(int id, Bebida bebida, Lanche lanche) {
         this.id = id;

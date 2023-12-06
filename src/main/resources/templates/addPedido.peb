@@ -6,7 +6,7 @@
 
 <h1>Cadastrar Pedido</h1>
 <form method="post" action="/addLanche.peb">
-    <label for="bebida">CBebida:</label>
+    <label for="bebida">Bebida:</label>
     <select name="bebida" id="bebida" value="{{bebidaId}}">
         {% for bebida in bebidas%}
             <option value="{{bebida.id}}" 
@@ -14,6 +14,17 @@
             selected
             {% endif %}
             >{{bebida.titulo}}</option>
+        {% endfor %}
+    </select>
+
+    <label for="Lanche">Lanche:</label>
+    <select name="lanche" id="lanche" value="{{lancheId}}">
+        {% for lanche in lanches%}
+            <option value="{{lanche.id}}" 
+            {% if lanche.id == lancheId %}
+            selected
+            {% endif %}
+            >{{lanche.titulo}}</option>
         {% endfor %}
     </select>
 

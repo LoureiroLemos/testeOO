@@ -9,7 +9,9 @@ import java.util.List;
 
 import com.github.hugoperlin.results.Resultado;
 
+import ifpr.pgua.eic.tads.contatos.model.entities.Bebida;
 import ifpr.pgua.eic.tads.contatos.model.entities.FabricaConexoes;
+import ifpr.pgua.eic.tads.contatos.model.entities.Lanche;
 import ifpr.pgua.eic.tads.contatos.model.entities.Pedido;
 
 public class JDBCPedidoDao implements PedidoDAO {
@@ -22,8 +24,21 @@ public class JDBCPedidoDao implements PedidoDAO {
 
     @Override
     public Resultado<Pedido> criar(Pedido pedido) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'criar'");
+        try (Connection con = fabricaConexao.getConnection();) {
+
+            PreparedStatement pstm = con
+                    .prepareStatement("INSERT INTO oo_pedidos(id_pedido,id_bebida,id_lanche) VALUES (?,?,?)");
+
+            pstm.setInt(1, pedido.getId());
+            pstm.setInt(2, pedido.getBebida().getId());
+            pstm.setInt(3, pedido.getLanche().getId());
+
+            pstm.executeUpdate();
+
+            return Resultado.sucesso("Pedido cadastrado!", pedido);
+        } catch (SQLException e) {
+            return Resultado.erro("Problema ao conectar " + e.getMessage());
+        }
     }
 
     @Override
@@ -32,18 +47,21 @@ public class JDBCPedidoDao implements PedidoDAO {
         try {
             Connection con = fabricaConexao.getConnection();
             PreparedStatement pstm = con.prepareStatement(
-                    "SELECT p.id_pedido, b.nome_bebida as bebida, l.nome_lanche FROM oo_pedidos p inner join oo_bebidas b inner join  oo_lanches l on p.id_bebida = b.id_bebida AND p.id_lanche = l.id_lanche");
+                    "SELECT * FROM oo_pedidos inner join oo_bebidas inner join oo_lanches on oo_pedidos.id_bebida = oo_bebidas.id_bebida AND oo_pedidos.id_lanche = oo_lanches.id_lanche");
 
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id_pedido");
-                String nomeBebida = rs.getString("bebida");
-                String nomeLanche = rs.getString("nome_lanche");
+                Bebida bebida = new Bebida(rs.getInt("id_bebida"), rs.getString("nome_bebida"),
+                        rs.getDouble("valor_bebida"));
+                Lanche lanche = new Lanche(rs.getInt("id_lanche"), rs.getString("nome_lanche"),
+                        rs.getDouble("valor_lanche"));
 
-                Pedido pedido = new Pedido(id, nomeBebida, nomeLanche);
+                Pedido pedido = new Pedido(id, bebida, lanche);
 
                 lista.add(pedido);
+
             }
             con.close();
             return Resultado.sucesso("Contatos carregados", lista);

@@ -49,7 +49,7 @@ public class App {
         AddLancheController addLancheController = new AddLancheController(lancheRepository);
         ListLancheController listLancheController = new ListLancheController(lancheRepository);
 
-        // AddPedidoController addPedidoController = new
+        AddPedidoController addPedidoController = new AddPedidoController(pedidoRepository);
         // AddPedidoController(pedidoRepository);
         ListPedidoController listPedidoController = new ListPedidoController(pedidoRepository);
 
@@ -65,7 +65,7 @@ public class App {
 
         app.get("/listLanches.peb", listLancheController.get);
 
-        // app.get("/addPedido.peb", addPedidoController.get);
+        app.get("/addPedido.peb", addPedidoController.get);
         // app.post("/addPedido.peb", addPedidoController.post);
         app.get("/listPedidos.peb", listPedidoController.get);
     }

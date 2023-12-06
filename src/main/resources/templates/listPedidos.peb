@@ -7,7 +7,7 @@
 {% else %}
     <ul>
     {% for pedido in lista %}
-        <li>Nº Pedido: {{pedido.id}} - Bebida: {{pedido.nome_bebida}} - Lanche: {{pedido.nome_lanche}}</li>
+        <li>Nº Pedido: {{pedido.id}} - Bebida: {{pedido.bebida.nome}} - Lanche: {{pedido.lanche.nome}}</li>
     {% endfor %}
     </ul>
 {% endif %}
