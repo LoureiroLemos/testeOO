@@ -27,11 +27,10 @@ public class JDBCPedidoDao implements PedidoDAO {
         try (Connection con = fabricaConexao.getConnection();) {
 
             PreparedStatement pstm = con
-                    .prepareStatement("INSERT INTO oo_pedidos(id_pedido,id_bebida,id_lanche) VALUES (?,?,?)");
+                    .prepareStatement("INSERT INTO oo_pedidos(id_bebida,id_lanche) VALUES (?,?)");
 
-            pstm.setInt(1, pedido.getId());
-            pstm.setInt(2, pedido.getBebida().getId());
-            pstm.setInt(3, pedido.getLanche().getId());
+            pstm.setInt(1, pedido.getBebida().getId());
+            pstm.setInt(2, pedido.getLanche().getId());
 
             pstm.executeUpdate();
 
@@ -47,7 +46,9 @@ public class JDBCPedidoDao implements PedidoDAO {
         try {
             Connection con = fabricaConexao.getConnection();
             PreparedStatement pstm = con.prepareStatement(
-                    "SELECT * FROM oo_pedidos inner join oo_bebidas inner join oo_lanches on oo_pedidos.id_bebida = oo_bebidas.id_bebida AND oo_pedidos.id_lanche = oo_lanches.id_lanche");
+                    "SELECT * FROM oo_pedidos inner join oo_bebidas inner join oo_lanches on oo_pedidos.id_bebida = oo_bebidas.id_bebida AND oo_pedidos.id_lanche = oo_lanches.id_lanche  \r\n"
+                            + //
+                            "ORDER BY `oo_pedidos`.`id_pedido` ASC");
 
             ResultSet rs = pstm.executeQuery();
 
@@ -64,7 +65,7 @@ public class JDBCPedidoDao implements PedidoDAO {
 
             }
             con.close();
-            return Resultado.sucesso("Contatos carregados", lista);
+            return Resultado.sucesso("Pedidos carregados", lista);
         } catch (SQLException e) {
             return Resultado.erro(e.getMessage());
         }

@@ -5,7 +5,7 @@
 {% endif %}
 
 <h1>Cadastrar Pedido</h1>
-<form method="post" action="/addLanche.peb">
+<form method="post" action="/addPedido.peb">
     <label for="bebida">Bebida:</label>
     <select name="bebida" id="bebida" value="{{bebidaId}}">
         {% for bebida in bebidas%}
@@ -13,7 +13,7 @@
             {% if bebida.id == bebidaId %}
             selected
             {% endif %}
-            >{{bebida.titulo}}</option>
+            >{{bebida.nome}}</option>
         {% endfor %}
     </select>
 
@@ -24,7 +24,7 @@
             {% if lanche.id == lancheId %}
             selected
             {% endif %}
-            >{{lanche.titulo}}</option>
+            >{{lanche.nome}}</option>
         {% endfor %}
     </select>
 

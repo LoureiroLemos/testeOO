@@ -42,7 +42,7 @@ public class JDBCBebidaDAO implements BebidaDAO {
 
     @Override
     public Resultado<List<Bebida>> listar() {
-        ArrayList<Bebida> lista = new ArrayList<>();
+        ArrayList<Bebida> bebidas = new ArrayList<>();
         try {
             Connection con = fabricaConexao.getConnection();
             PreparedStatement pstm = con.prepareStatement("SELECT * FROM oo_bebidas");
@@ -56,11 +56,11 @@ public class JDBCBebidaDAO implements BebidaDAO {
 
                 Bebida bebida = new Bebida(id, nome, valor);
 
-                lista.add(bebida);
+                bebidas.add(bebida);
 
             }
             con.close();
-            return Resultado.sucesso("Bebidas carregadas", lista);
+            return Resultado.sucesso("Bebidas carregadas", bebidas);
 
         } catch (SQLException e) {
             return Resultado.erro(e.getMessage());

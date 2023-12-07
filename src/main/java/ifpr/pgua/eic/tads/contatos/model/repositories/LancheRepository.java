@@ -10,4 +10,6 @@ public interface LancheRepository {
     Resultado<Lanche> cadastrar(String nome, Double valor);
 
     Resultado<List<Lanche>> listarTodos();
+
+    Resultado<Lanche> getById(int id);
 }

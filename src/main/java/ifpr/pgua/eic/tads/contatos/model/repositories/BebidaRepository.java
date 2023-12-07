@@ -8,4 +8,7 @@ public interface BebidaRepository {
     Resultado<Bebida> cadastrar(String nome, Double valor);
 
     Resultado<List<Bebida>> listarTodos();
+
+    Resultado<Bebida> getById(int id);
+
 }

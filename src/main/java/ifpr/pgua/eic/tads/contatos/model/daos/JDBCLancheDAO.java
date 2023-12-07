@@ -41,7 +41,7 @@ public class JDBCLancheDAO implements LancheDAO {
 
     @Override
     public Resultado<List<Lanche>> listar() {
-        ArrayList<Lanche> lista = new ArrayList<>();
+        ArrayList<Lanche> lanches = new ArrayList<>();
         try {
             Connection con = fabricaConexao.getConnection();
             PreparedStatement pstm = con.prepareStatement("SELECT * FROM oo_lanches");
@@ -55,11 +55,11 @@ public class JDBCLancheDAO implements LancheDAO {
 
                 Lanche lanche = new Lanche(id, nome, valor);
 
-                lista.add(lanche);
+                lanches.add(lanche);
 
             }
             con.close();
-            return Resultado.sucesso("Contatos carregados", lista);
+            return Resultado.sucesso("Contatos carregados", lanches);
         } catch (SQLException e) {
             return Resultado.erro(e.getMessage());
         }

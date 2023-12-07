@@ -23,10 +23,6 @@ import ifpr.pgua.eic.tads.contatos.model.repositories.PedidoRepository;
 import ifpr.pgua.eic.tads.contatos.utils.JavalinUtils;
 import io.javalin.Javalin;
 
-/**
- * Hello world!
- *
- */
 public class App {
     public static void main(String[] args) {
 
@@ -49,8 +45,8 @@ public class App {
         AddLancheController addLancheController = new AddLancheController(lancheRepository);
         ListLancheController listLancheController = new ListLancheController(lancheRepository);
 
-        AddPedidoController addPedidoController = new AddPedidoController(pedidoRepository);
-        // AddPedidoController(pedidoRepository);
+        AddPedidoController addPedidoController = new AddPedidoController(pedidoRepository, bebidaRepository,
+                lancheRepository);
         ListPedidoController listPedidoController = new ListPedidoController(pedidoRepository);
 
         app.get("/", indexController.get);
@@ -66,7 +62,8 @@ public class App {
         app.get("/listLanches.peb", listLancheController.get);
 
         app.get("/addPedido.peb", addPedidoController.get);
-        // app.post("/addPedido.peb", addPedidoController.post);
+        app.post("/addPedido.peb", addPedidoController.post);
+
         app.get("/listPedidos.peb", listPedidoController.get);
     }
 }
