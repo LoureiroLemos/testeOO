@@ -28,7 +28,8 @@
         {% endfor %}
     </select>
 
-
+    <label for="observacao">Observação:</label>
+    <input type="text" id="observacao" name="observacao" value="{{observacao}}"/><br />
     
     <input type="submit" />
 </form>

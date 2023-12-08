@@ -7,10 +7,12 @@
 {% else %}
     <ul>
     {% for pedido in lista %}
-        <li>Nº Pedido: {{pedido.id}} - Bebida: {{pedido.bebida.nome}} - Lanche: {{pedido.lanche.nome}} - Total: R${{pedido.bebida.valor+pedido.lanche.valor}}</li>
+        <li>Nº Pedido: {{pedido.id}} - Bebida: {{pedido.bebida.nome}} - Lanche: {{pedido.lanche.nome}} - </br>Observação: {{pedido.observacao}} </br>Total: R${{pedido.bebida.valor+pedido.lanche.valor}}</li>
     {% endfor %}
     </ul>
 {% endif %}
+
+
 
 <button>
     <a href="/">Voltar</a>

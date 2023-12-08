@@ -43,6 +43,7 @@ public class AddPedidoController {
     public Handler post = (Context ctx) -> {
         String bebidaId = ctx.formParam("bebida");
         String lancheId = ctx.formParam("lanche");
+        String observacao = ctx.formParam("observacao");
 
         Resultado<Bebida> resultadoBebida = repositorioBebida.getById(Integer.valueOf(bebidaId));
         Resultado<Lanche> resultadoLanche = repositorioLanche.getById(Integer.valueOf(lancheId));
@@ -50,7 +51,7 @@ public class AddPedidoController {
         Bebida bebida = resultadoBebida.comoSucesso().getObj();
         Lanche lanche = resultadoLanche.comoSucesso().getObj();
 
-        Resultado<Pedido> resultado = repository.cadastrar(bebida, lanche);
+        Resultado<Pedido> resultado = repository.cadastrar(bebida, lanche, observacao);
 
         Map<String, Object> model = new HashMap<>();
         model.put("resultado", resultado);

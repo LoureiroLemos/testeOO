@@ -9,7 +9,7 @@ import ifpr.pgua.eic.tads.contatos.model.entities.Lanche;
 import ifpr.pgua.eic.tads.contatos.model.entities.Pedido;
 
 public interface PedidoRepository {
-    Resultado<Pedido> cadastrar(Bebida bebida, Lanche lanche);
+    Resultado<Pedido> cadastrar(Bebida bebida, Lanche lanche, String observacao);
 
     Resultado<List<Pedido>> listarTodos();
 }

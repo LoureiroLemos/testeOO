@@ -10,6 +10,7 @@ import java.util.List;
 import com.github.hugoperlin.results.Resultado;
 
 import ifpr.pgua.eic.tads.contatos.model.entities.Lanche;
+import ifpr.pgua.eic.tads.contatos.model.entities.Pedido;
 import ifpr.pgua.eic.tads.contatos.model.entities.FabricaConexoes;
 
 public class JDBCLancheDAO implements LancheDAO {
@@ -64,6 +65,32 @@ public class JDBCLancheDAO implements LancheDAO {
             return Resultado.erro(e.getMessage());
         }
 
+    }
+
+    @Override
+    public Resultado<Lanche> buscarLanchePedido(Pedido pedido) {
+        try (Connection con = fabricaConexao.getConnection();) {
+            PreparedStatement pstm = con.prepareStatement(
+                    "SELECT * from oo_lanches inner JOIN oo_pedidos on oo_lanches.id_lanche=oo_pedidos.id_lanche WHERE oo_pedidos.id_pedido=?");
+
+            pstm.setInt(1, pedido.getId());
+
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("oo_lanches.id_lanche");
+                String nome = rs.getString("oo_lanches.nome_lanche");
+                Double descricao = rs.getDouble("oo_lanches.valor_lanche");
+
+                Lanche lanche1 = new Lanche(id, nome, descricao);
+                return Resultado.sucesso("Lanches carregados", lanche1);
+
+            }
+            return Resultado.erro("Lanche não encontrado");
+
+        } catch (SQLException e) {
+            return Resultado.erro("Problema ao fazer seleção!! " + e.getMessage());
+        }
     }
 
 }
